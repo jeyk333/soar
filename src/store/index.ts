@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 import { persistReducer, persistStore } from 'redux-persist';
-import thunk from 'redux-thunk';
 
 import reducers from './reducers';
 
@@ -19,7 +18,7 @@ const persistedReducer = persistReducer(persistConfig, reducers);
 const middleware = (getDefaultMiddleware: any) => {
   return getDefaultMiddleware({
     serializableCheck: false,
-  }).concat(thunk);
+  });
 };
 
 // Configure store

@@ -4,5 +4,12 @@
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  /* Theme Color Variables */
+  --primary: #343c6a;
+  --primary-light: #8ba3cb;
   --border: #e6eff5;
+  --text: #232323;
+  --text-light: #b1b1b1;
+  --background: #f5f7fa;
 }
