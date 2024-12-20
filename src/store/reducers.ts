@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
+import userReducer from './user/slice';
+
 const reducers = combineReducers({
-  // itinerary: itineraryReducer
+  user: userReducer,
 });
 
 export default reducers;
