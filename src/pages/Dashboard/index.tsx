@@ -6,6 +6,8 @@ import { fetchCreditCards, fetchTransactions } from '@/store/user/action';
 import { RootState, AppDispatch } from '@/store';
 import CreditCard, { CreditCardType } from '@/components/CreditCard';
 import TransactionCard, { TransactionType } from '@/components/TransactionCard';
+import BarChart from '@/components/BarChart';
+import PolarAreaChart from '@/components/PolarAreaChart';
 
 const Dashboard: FC = () => {
   const user = useSelector((root: RootState) => root.user);
@@ -36,7 +38,6 @@ const Dashboard: FC = () => {
           </SectionWrapper>
         </div>
         <div className="w-4/12">
-          {' '}
           <SectionWrapper title="Recent Transaction">
             <div className="bg-white p-[25px] rounded-[25px]">
               {user?.transactions?.map((transaction: TransactionType) => (
@@ -45,6 +46,26 @@ const Dashboard: FC = () => {
                   transaction={transaction}
                 />
               ))}
+            </div>
+          </SectionWrapper>
+        </div>
+      </div>
+      <div className="flex gap-[30px] mt-6">
+        {' '}
+        <div className="w-8/12">
+          {' '}
+          <SectionWrapper title="Weekly Activity">
+            {' '}
+            <div className="bg-white p-[25px] rounded-[25px]">
+              <BarChart />
+            </div>
+          </SectionWrapper>
+        </div>
+        <div className="w-4/12">
+          <SectionWrapper title="Expense Statistics">
+            {' '}
+            <div className="bg-white p-[25px] rounded-[25px]">
+              <PolarAreaChart />
             </div>
           </SectionWrapper>
         </div>
