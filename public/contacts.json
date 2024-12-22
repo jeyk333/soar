@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "name": "Livia Bator",
+      "designation": "CEO",
+      "image": "/livia-bator.png"
+    },
+    {
+      "id": 1,
+      "name": "Randy Press",
+      "designation": "Director",
+      "image": "/randy-press.png"
+    },
+    {
+      "id": 2,
+      "name": "Workman",
+      "designation": "Designer",
+      "image": "/workman.png"
+    },
+    {
+      "id": 3,
+      "name": "Workman",
+      "designation": "Designer",
+      "image": "/workman-1.png"
+    },
+    {
+      "id": 4,
+      "name": "Workman",
+      "designation": "Designer",
+      "image": "/workman-3.png"
+    }
+  ]
+}

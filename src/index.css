@@ -9,6 +9,7 @@
   --primary: #343c6a;
   --primary-light: #8ba3cb;
   --border: #e6eff5;
+  --border-light: #f4f5f7;
   --card-border: #dfeaf2;
   --text: #232323;
   --text-light: #b1b1b1;
@@ -16,4 +17,10 @@
   --background: #f5f7fa;
   --error: #ff4b4a;
   --success: #41d4a8;
+}
+
+/* Custom CSS */
+/* Slider */
+.slick-arrow.slick-prev {
+  display: none !important;
 }

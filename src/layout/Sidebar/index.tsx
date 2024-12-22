@@ -9,7 +9,7 @@ const Sidebar: FC = () => {
   const { pathname } = useLocation();
 
   return (
-    <div className="w-2/12 border-r border-border">
+    <div className="w-2/12 border-r border-border hidden md:block">
       <div className="py-8">
         <img src={Logo} alt="Soar Task" className="w-[167px] mx-auto" />
       </div>

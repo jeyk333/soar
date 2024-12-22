@@ -8,9 +8,9 @@ const Layout: FC = () => {
   return (
     <div className="h-screen max-h-screen flex">
       <Sidebar />
-      <div className="w-10/12">
+      <div className="w-full md:w-10/12">
         <Header />
-        <div className="bg-background px-10 py-[30px] ">
+        <div className="bg-background px-[25px] md:px-10 py-[30px] h-[calc(100vh-101px)] overflow-auto">
           <Outlet />
         </div>
       </div>

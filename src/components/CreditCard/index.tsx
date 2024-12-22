@@ -22,22 +22,22 @@ const CreditCard: FC<Props> = ({ card }) => {
     <div
       className={`rounded-[25px] overflow-hidden font-lato w-full ${card.type === 'dark' ? 'bg-card-dark' : 'bg-white border border-card-border'}`}
     >
-      <div className="p-6">
-        <div className="flex justify-between mb-[33px]">
+      <div className="p-5 md:p-6">
+        <div className="flex justify-between mb-5 md:mb-[33px]">
           <div>
             <p
-              className={`text-xs ${card.type === 'dark' ? 'text-white' : 'text-text-label'}`}
+              className={`text-[11px] md:text-xs ${card.type === 'dark' ? 'text-white' : 'text-text-label'}`}
             >
               Balance
             </p>
             <p
-              className={`text-xl font-semibold ${card.type === 'dark' ? 'text-white' : 'text-primary'}`}
+              className={`text-base md:text-xl font-semibold ${card.type === 'dark' ? 'text-white' : 'text-primary'}`}
             >
               ${card.balance}
             </p>
           </div>
           <img
-            className="w-[35px] h-[35px]"
+            className="w-[29px] md:w-[35px] h-[29px] md:h-[35px]"
             src={card?.type === 'dark' ? CardChipWhite : CardChipDark}
             alt="Card Chip"
           />
@@ -45,24 +45,24 @@ const CreditCard: FC<Props> = ({ card }) => {
         <div className="flex">
           <div className="w-1/2">
             <p
-              className={`text-xs ${card.type === 'dark' ? 'text-white opacity-75' : 'text-text-label'}`}
+              className={`text-[10px] md:text-xs ${card.type === 'dark' ? 'text-white opacity-75' : 'text-text-label'}`}
             >
               CARD HOLDER
             </p>
             <p
-              className={`leading-[18px] font-semibold text-[15px] mt-px ${card.type === 'dark' ? 'text-white' : 'text-primary'}`}
+              className={`leading-[18px] font-semibold text-[13px] md:text-[15px] mt-px ${card.type === 'dark' ? 'text-white' : 'text-primary'}`}
             >
               {card.name}
             </p>
           </div>
           <div className="w-1/2">
             <p
-              className={`text-xs ${card.type === 'dark' ? 'text-white opacity-75' : 'text-text-label'}`}
+              className={`text-[10px] md:text-xs ${card.type === 'dark' ? 'text-white opacity-75' : 'text-text-label'}`}
             >
               VALID THRU
             </p>
             <p
-              className={`leading-[18px] font-semibold text-[15px] mt-px ${card.type === 'dark' ? 'text-white' : 'text-primary'}`}
+              className={`leading-[18px] font-semibold text-[13px] md:text-[15px] mt-px ${card.type === 'dark' ? 'text-white' : 'text-primary'}`}
             >
               {card.valid}
             </p>
@@ -70,14 +70,18 @@ const CreditCard: FC<Props> = ({ card }) => {
         </div>
       </div>
       <div
-        className={`px-6 py-5 flex items-center justify-between ${card.type === 'dark' ? 'bg-card-dark-footer' : 'bg-white border-t border-card-border'} mt-[35px]`}
+        className={`px-5 md:px-6 py-4 md:py-5 flex items-center justify-between ${card.type === 'dark' ? 'bg-card-dark-footer' : 'bg-white border-t border-card-border'} mt-0 md:mt-[35px]`}
       >
         <p
-          className={`text-[22px] font-semibold ${card.type === 'dark' ? 'text-white' : 'text-primary'}`}
+          className={`text-[15px] md:text-[22px] font-semibold ${card.type === 'dark' ? 'text-white' : 'text-primary'}`}
         >
           {card.number}
         </p>
-        <img src={CardType} alt="Card Name" className="w-[44px] h-[30px]" />
+        <img
+          src={CardType}
+          alt="Card Name"
+          className="w-[27px] md:w-[44px] h-[18px] md:h-[30px]"
+        />
       </div>
     </div>
   );

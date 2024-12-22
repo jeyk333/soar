@@ -6,6 +6,7 @@ import {
   ChartTypeRegistry,
   ArcElement,
   CategoryScale,
+  ScriptableContext,
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -37,7 +38,7 @@ const PolarAreaChart: FC = () => {
         color: '#fff',
         anchor: 'center',
         align: 'center',
-        formatter: (value: number, context) => {
+        formatter: (value: number, context: ScriptableContext<'polarArea'>) => {
           const label = context.chart.data.labels[context.dataIndex];
           return `${value}%\n${label}`;
         },
