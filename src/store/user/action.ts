@@ -5,11 +5,13 @@ import {
   getCreditCards,
   getTransactions,
   getContacts,
+  getChartData,
   postUserInfo,
 } from '@/services';
 import { AppDispatch } from '@/store';
 import { UserInfoType } from './slice';
 import { delay } from '@/utils/delay';
+import { store } from '@/store';
 
 const {
   loadingUserInfo,
@@ -24,6 +26,10 @@ const {
   loadingContacts,
   setContacts,
   contactsError,
+  loadingChartData,
+  setChartData,
+  ChartDataError,
+  toggleMobileSidebar,
 } = actions;
 
 export const fetchUserInfo: any =
@@ -44,6 +50,7 @@ export const fetchCreditCards: any =
   async (dispatch: AppDispatch): Promise<void> => {
     dispatch(loadingCards());
     try {
+      await delay(1500);
       const response = await getCreditCards();
       dispatch(setCards(response?.data));
     } catch (err) {
@@ -57,6 +64,7 @@ export const fetchTransactions: any =
   async (dispatch: AppDispatch): Promise<void> => {
     dispatch(loadingTransactions());
     try {
+      await delay(1500);
       const response = await getTransactions();
       dispatch(setTransactions(response?.data));
     } catch (err) {
@@ -70,10 +78,25 @@ export const fetchContacts: any =
   async (dispatch: AppDispatch): Promise<void> => {
     dispatch(loadingContacts());
     try {
+      await delay(1500);
       const response = await getContacts();
       dispatch(setContacts(response?.data));
     } catch (err) {
       dispatch(contactsError());
+      throw err;
+    }
+  };
+
+export const fetchChartData: any =
+  () =>
+  async (dispatch: AppDispatch): Promise<void> => {
+    dispatch(loadingChartData());
+    try {
+      await delay(1500);
+      const response = await getChartData();
+      dispatch(setChartData(response?.data));
+    } catch (err) {
+      dispatch(ChartDataError());
       throw err;
     }
   };
@@ -90,4 +113,10 @@ export const saveUserInfo: any =
       dispatch(userInfoError());
       throw err;
     }
+  };
+
+export const toggleSidebar: any =
+  () =>
+  async (dispatch: AppDispatch): Promise<void> => {
+    dispatch(toggleMobileSidebar(!store.getState().user?.showMobileSidebar));
   };

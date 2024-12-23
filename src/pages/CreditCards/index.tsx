@@ -19,13 +19,13 @@ const CreditCards: FC = () => {
   };
   return (
     <div>
-      <div className="flex flex-col md:flex-row gap-[30px]">
+      <div className="flex flex-col lg:flex-row gap-[30px]">
         <div className="w-full">
           <SectionWrapper title="My Cards">
-            <div className="flex items-center flex-col md:flex-row flex-wrap gap-[30px]">
+            <div className="flex items-center flex-col lg:flex-row flex-wrap gap-[30px]">
               {user?.cards?.map((card: CreditCardType) => (
-                <div key={card.id} className="w-full md:w-[31%]">
-                  <CreditCard card={card} />
+                <div key={card.id} className="w-full lg:w-[47%] xl:w-[31%]">
+                  <CreditCard card={card} isLoading={user?.isCardsLoading} />
                 </div>
               ))}
             </div>

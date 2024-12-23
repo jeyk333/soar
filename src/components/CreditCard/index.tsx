@@ -3,6 +3,7 @@ import { FC } from 'react';
 import CardChipWhite from '@/assets/images/card-chip-white.png';
 import CardChipDark from '@/assets/images/card-chip-dark.png';
 import CardType from '@/assets/images/card-type.png';
+import CreditCardLoader from '../SkeletonLoader/CreditCardLoader';
 
 export interface CreditCardType {
   id: number;
@@ -15,14 +16,17 @@ export interface CreditCardType {
 
 interface Props {
   card: CreditCardType;
+  isLoading: boolean;
 }
 
-const CreditCard: FC<Props> = ({ card }) => {
+const CreditCard: FC<Props> = ({ card, isLoading }) => {
+  if (isLoading) return <CreditCardLoader />;
+
   return (
     <div
       className={`rounded-[25px] overflow-hidden font-lato w-full ${card.type === 'dark' ? 'bg-card-dark' : 'bg-white border border-card-border'}`}
     >
-      <div className="p-5 md:p-6">
+      <div className="pt-5 md:pt-6 px-5 md:px-6">
         <div className="flex justify-between mb-5 md:mb-[33px]">
           <div>
             <p
@@ -70,7 +74,7 @@ const CreditCard: FC<Props> = ({ card }) => {
         </div>
       </div>
       <div
-        className={`px-5 md:px-6 py-4 md:py-5 flex items-center justify-between ${card.type === 'dark' ? 'bg-card-dark-footer' : 'bg-white border-t border-card-border'} mt-0 md:mt-[35px]`}
+        className={`px-5 md:px-6 py-4 md:py-5 flex items-center justify-between ${card.type === 'dark' ? 'bg-card-dark-footer' : 'bg-white border-t border-card-border'} mt-[16.11px] md:mt-[35.11px]`}
       >
         <p
           className={`text-[15px] md:text-[22px] font-semibold ${card.type === 'dark' ? 'text-white' : 'text-primary'}`}

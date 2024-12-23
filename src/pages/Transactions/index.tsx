@@ -8,7 +8,7 @@ import TransactionCard, { TransactionType } from '@/components/TransactionCard';
 const Transactions: FC = () => {
   const user = useSelector((root: RootState) => root.user);
   const dispatch = useDispatch<AppDispatch>();
-  console.log(user);
+
   useEffect(() => {
     getUserTransactions();
   }, []);
@@ -17,9 +17,13 @@ const Transactions: FC = () => {
     dispatch(fetchTransactions());
   };
   return (
-    <div className="bg-white p-6 rounded-3xl">
+    <div className="bg-white p-0 md:p-6 rounded-3xl">
       {user?.transactions?.map((transaction: TransactionType) => (
-        <TransactionCard key={transaction.id} transaction={transaction} />
+        <TransactionCard
+          key={transaction.id}
+          transaction={transaction}
+          isLoading={user?.isTransactionsLoading}
+        />
       ))}
     </div>
   );

@@ -1,5 +1,6 @@
-import { FC, ElementType, useState, ChangeEvent } from 'react';
+import { FC, ElementType, useState, ChangeEvent, FormEvent } from 'react';
 import Slider from 'react-slick';
+import { toast } from 'react-toastify';
 
 import ContactCard, { ContactType } from '@/components/ContactCard';
 import Arrow from '@/assets/images/slide-arrow.png';
@@ -7,6 +8,7 @@ import Send from '@/assets/images/send.png';
 
 interface Props {
   contacts: ContactType[];
+  isLoading: boolean;
 }
 
 const NextArrow: ElementType = (props: {
@@ -26,7 +28,7 @@ const NextArrow: ElementType = (props: {
   );
 };
 
-const ContactSlider: FC<Props> = ({ contacts }) => {
+const QuickTransfer: FC<Props> = ({ contacts, isLoading }) => {
   const [amount, setAmount] = useState<string>('');
   const settings = {
     dots: false,
@@ -36,35 +38,51 @@ const ContactSlider: FC<Props> = ({ contacts }) => {
     slidesToScroll: 1,
     nextArrow: <NextArrow />,
   };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    toast.success('Amount sent successfully');
+  };
   return (
-    <div>
+    <div className="py-[10px] h-[226px]">
       <div className="slider-container">
         <Slider {...settings}>
           {contacts?.map((contact: ContactType) => (
-            <ContactCard key={contact?.id} contact={contact} />
+            <ContactCard
+              key={contact?.id}
+              contact={contact}
+              isLoading={isLoading}
+            />
           ))}
         </Slider>
       </div>
       <div className="flex items-center gap-[25px] md:gap-[27px] mt-[30px]">
         <p className="text-text-label text-xs md:text-base">Write Amount</p>
-        <div className="bg-background rounded-[40px] flex items-center gap-[15px] pl-[25px]">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-background rounded-[40px] flex items-center gap-[15px] pl-[25px]"
+        >
           <input
             value={amount}
             type="number"
+            required
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setAmount(e.target.value)
             }
             placeholder="535.0"
             className="text-xs md:text-[15px] bg-background w-[60px] md:w-[100px] placeholder:text-primary-light active:outline-none focus:outline-none"
           />
-          <button className="-ml-2 shadow-arrow rounded-full px-[21px] md:px-6 py-[13px] bg-text text-[13px] md:text-base text-white flex items-center gap-3">
+          <button
+            type="submit"
+            className="-ml-2 hover:font-semibold shadow-arrow hover:shadow-lg rounded-full px-[21px] md:px-6 py-[13px] bg-text text-[13px] md:text-base text-white flex items-center gap-3"
+          >
             <span>Send</span>
             <img src={Send} alt="Send" className="w-[26px] w-[22.6px]" />
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
 };
 
-export default ContactSlider;
+export default QuickTransfer;

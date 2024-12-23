@@ -12,9 +12,14 @@ const SectionWrapper: FC<Props> = ({ title, children, link, linkLabel }) => {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-primary text-[22px] font-semibold">{title}</h3>
+        <h3 className="text-primary text-base md:text-[22px] font-semibold">
+          {title}
+        </h3>
         {link ? (
-          <Link to={link} className="font-semibold text-[17px]">
+          <Link
+            to={link}
+            className="font-semibold text-[14px] md:text-[17px] hover:underline"
+          >
             {linkLabel}
           </Link>
         ) : null}

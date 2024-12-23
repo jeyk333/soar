@@ -1,5 +1,7 @@
 import { FC, useState } from 'react';
 
+import ContactCardLoader from '../SkeletonLoader/ContactCardLoader';
+
 export interface ContactType {
   id: number;
   name: string;
@@ -9,10 +11,12 @@ export interface ContactType {
 
 interface Props {
   contact: ContactType;
+  isLoading: boolean;
 }
 
-const ContactCard: FC<Props> = ({ contact }) => {
+const ContactCard: FC<Props> = ({ contact, isLoading }) => {
   const [selectedContact, setSelectedContact] = useState<number>(0);
+  if (isLoading) return <ContactCardLoader />;
   return (
     <div
       onClick={() => setSelectedContact(contact?.id)}

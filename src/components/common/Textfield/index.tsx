@@ -10,6 +10,7 @@ interface PropType {
   classNames?: string;
   readOnly?: boolean;
   required?: boolean;
+  errorMessage?: string;
 }
 
 const Textfield: FC<PropType> = ({
@@ -22,9 +23,10 @@ const Textfield: FC<PropType> = ({
   classNames,
   readOnly = false,
   required = false,
+  errorMessage,
 }) => {
   return (
-    <div className={classNames}>
+    <div className={`${classNames} relative`}>
       <label
         htmlFor={name}
         className="block text-[13px] md:text-base leading-[19.36px] mb-[9px] md:mb-[11px] text-text w-full"
@@ -38,10 +40,13 @@ const Textfield: FC<PropType> = ({
         id={name}
         placeholder={placeholder}
         name={name}
-        className={`text-text-label w-full border border-card-border rounded-[15px] px-5 py-4 text-xs md:text-[15px] ${readOnly ? 'focus:outline-none' : ''}`}
+        className={`text-text-label w-full border ${errorMessage ? 'border-error' : 'border-card-border'} rounded-[15px] px-5 py-4 text-xs md:text-[15px] ${readOnly ? 'focus:outline-none' : ''}`}
         value={value}
         onChange={onChange}
       />
+      {errorMessage ? (
+        <p className="text-[10px] absolute text-error">{errorMessage}</p>
+      ) : null}
     </div>
   );
 };

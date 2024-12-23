@@ -1,35 +1,41 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import {
   Chart as ChartJS,
   ChartData,
   RadialLinearScale,
-  ChartTypeRegistry,
   ArcElement,
   CategoryScale,
-  ScriptableContext,
+  ChartOptions,
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+import ChartDataLabels, { Context } from 'chartjs-plugin-datalabels';
+import { ChartDataType } from '@/store/user/slice';
 
 ChartJS.register(RadialLinearScale, ArcElement, ChartDataLabels, CategoryScale);
 
-const PolarAreaChart: FC = () => {
-  const values = [25, 30, 25, 20];
-  const colors = ['#343C6A', '#FC7900', '#232323', '#396AFF'];
+interface Props {
+  data: ChartDataType | undefined;
+  isLoading: boolean;
+}
 
-  const data: ChartData<keyof ChartTypeRegistry, unknown, unknown> = {
-    labels: ['Entertainment', 'Bill Expense', 'Others', 'Investment'],
+const PolarAreaChart: FC<Props> = ({ data: details, isLoading }) => {
+  const labels = useMemo(() => details?.labels || [], [details]);
+  const values = useMemo(() => details?.values || [], [details]);
+
+  const data: ChartData<'polarArea', unknown, unknown> = {
+    labels: [...labels],
     datasets: [
       {
-        data: values,
-        backgroundColor: colors,
+        data: [...values],
+        backgroundColor: ['#343C6A', '#FC7900', '#232323', '#396AFF'],
         borderWidth: 10,
       },
     ],
   };
 
-  const options = {
+  const options: ChartOptions<'polarArea'> = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: false,
@@ -38,13 +44,15 @@ const PolarAreaChart: FC = () => {
         color: '#fff',
         anchor: 'center',
         align: 'center',
-        formatter: (value: number, context: ScriptableContext<'polarArea'>) => {
-          const label = context.chart.data.labels[context.dataIndex];
+        formatter: (value: number, context: Context) => {
+          const label = context?.chart?.data?.labels
+            ? context.chart.data.labels[context.dataIndex]
+            : '';
           return `${value}%\n${label}`;
         },
         font: {
-          size: 16,
-          weight: 700,
+          size: 13,
+          weight: 600,
         },
         textAlign: 'center',
       },
@@ -69,10 +77,16 @@ const PolarAreaChart: FC = () => {
     },
   };
 
+  if (isLoading)
+    return (
+      <div className="h-[356px] rounded-[25px] animate-pulse bg-gray-200"></div>
+    );
+
   return (
-    <div>
-      <div>
+    <div className="bg-white p-[25px] rounded-[25px]">
+      <div className="h-[322px]">
         <Chart
+          key={JSON.stringify(details)}
           className="-mt-4"
           type="polarArea"
           data={data}

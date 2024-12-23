@@ -1,15 +1,28 @@
 import { FC, ElementType, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Logo from '@/assets/images/text-logo.png';
 import { MENUS, MenuType } from '@/constants/menus';
+import { RootState, AppDispatch } from '@/store';
+import { toggleSidebar } from '@/store/user/action';
 
 const Sidebar: FC = () => {
   const [isHovering, setIsHovering] = useState<number | null>(null);
   const { pathname } = useLocation();
+  const { showMobileSidebar } = useSelector((root: RootState) => root.user);
+  const dispatch: AppDispatch = useDispatch();
 
   return (
-    <div className="w-2/12 border-r border-border hidden md:block">
+    <div
+      className={`${showMobileSidebar ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'} transition-all w-8/12 md:w-5/12 lg:w-3/12 xl:w-2/12 border-r border-border absolute lg:relative z-[999] bg-white h-screen`}
+    >
+      <span
+        onClick={() => dispatch(toggleSidebar())}
+        className="cursor-pointer absolute right-4 top-4 text-lg block lg:hidden font-semibold"
+      >
+        &#x2715;
+      </span>
       <div className="py-8">
         <img src={Logo} alt="Soar Task" className="w-[167px] mx-auto" />
       </div>
@@ -19,6 +32,7 @@ const Sidebar: FC = () => {
           return (
             <Link
               to={menu.path}
+              onClick={() => dispatch(toggleSidebar())}
               key={menu.id}
               onMouseEnter={() => setIsHovering(menu.id)}
               onMouseLeave={() => setIsHovering(null)}

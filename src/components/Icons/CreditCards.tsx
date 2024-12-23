@@ -16,7 +16,7 @@ const CreditCards = ({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_14_1249)">
+      <g clipPath="url(#clip0_14_1249)">
         <path
           d="M22.9608 7.16339V6.80772C22.9608 5.17271 21.6306 3.8425 19.9956 3.8425H2.96522C1.33016 3.84255 0 5.17271 0 6.80772V7.16339H22.9608Z"
           fill={color}

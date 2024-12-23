@@ -3,6 +3,18 @@ import { createSlice } from '@reduxjs/toolkit';
 import { CreditCardType } from '@/components/CreditCard';
 import { TransactionType } from '@/components/TransactionCard';
 import { ContactType } from '@/components/ContactCard';
+import { BarChartDataType } from '@/components/BarChart';
+
+export interface ChartDataType {
+  labels: string[];
+  values: number[];
+}
+
+export interface ChartsDataType {
+  weeklyActivity: BarChartDataType;
+  expenseStatistics: ChartDataType;
+  balanceHistory: ChartDataType;
+}
 
 export interface UserInfoType {
   id?: number;
@@ -25,9 +37,12 @@ interface StateType {
   isCardsLoading: boolean;
   isTransactionsLoading: boolean;
   isContactsLoading: boolean;
+  isChartDataLoading: boolean;
   cards: CreditCardType[];
   transactions: TransactionType[];
   contacts: ContactType[];
+  chartData: ChartsDataType | null;
+  showMobileSidebar: boolean;
 }
 
 const initialState: StateType = {
@@ -36,9 +51,12 @@ const initialState: StateType = {
   isCardsLoading: false,
   isTransactionsLoading: false,
   isContactsLoading: false,
+  isChartDataLoading: false,
   cards: [],
   transactions: [],
   contacts: [],
+  chartData: null,
+  showMobileSidebar: false,
 };
 
 const userSlice = createSlice({
@@ -84,6 +102,19 @@ const userSlice = createSlice({
     },
     contactsError(state) {
       state.isContactsLoading = false;
+    },
+    loadingChartData(state) {
+      state.isChartDataLoading = true;
+    },
+    setChartData(state, action) {
+      state.isChartDataLoading = false;
+      state.chartData = action.payload.data;
+    },
+    ChartDataError(state) {
+      state.isChartDataLoading = false;
+    },
+    toggleMobileSidebar(state, action) {
+      state.showMobileSidebar = action.payload;
     },
   },
 });

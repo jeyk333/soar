@@ -22,5 +22,10 @@
 /* Custom CSS */
 /* Slider */
 .slick-arrow.slick-prev {
-  display: none !important;
+  display: none !important; /* Hides the Prev slider icon */
+}
+
+/* Date Input */
+.date-input::-webkit-calendar-picker-indicator {
+  display: none; /* Hides the native calendar icon */
 }

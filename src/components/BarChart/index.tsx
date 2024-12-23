@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import {
   Chart as ChartJS,
   LinearScale,
@@ -7,18 +7,31 @@ import {
   Tooltip,
   Legend,
   ChartData,
-  ChartTypeRegistry,
+  ChartOptions,
+  LegendItem,
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
 
-ChartJS.register(LinearScale, BarElement, PointElement, Tooltip, Legend);
+ChartJS?.register(LinearScale, BarElement, PointElement, Tooltip, Legend);
 
-const BarChart: FC = () => {
+export interface BarChartDataType {
+  duration: string[];
+  withdraw: number[];
+  deposit: number[];
+}
+
+interface Props {
+  data: BarChartDataType | undefined;
+  isLoading: boolean;
+}
+
+const BarChart: FC<Props> = ({ data: details, isLoading }) => {
+  //Custom plugin for legend
   const legendSpace = {
     id: 'legendSpace',
     afterInit(chart: ChartJS) {
-      if (chart) {
-        const originalFit = chart?.legend.fit;
+      if (chart?.legend?.fit) {
+        const originalFit = chart.legend.fit;
         chart.legend.fit = function fit() {
           if (originalFit) {
             originalFit.call(this);
@@ -29,13 +42,17 @@ const BarChart: FC = () => {
     },
   };
 
-  const data: ChartData<keyof ChartTypeRegistry, unknown, unknown> = {
-    labels: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+  const labels = useMemo(() => details?.duration || [], [details]);
+  const withdrawData = useMemo(() => details?.withdraw || [], [details]);
+  const depositData = useMemo(() => details?.deposit || [], [details]);
+
+  const data: ChartData<'bar', unknown, unknown> = {
+    labels: labels,
     datasets: [
       {
         type: 'bar',
         label: 'Withdraw',
-        data: [450, 340, 320, 380, 240, 240, 360],
+        data: [...withdrawData],
         backgroundColor: '#232323',
         borderColor: '#232323',
         borderWidth: 1,
@@ -47,7 +64,7 @@ const BarChart: FC = () => {
       {
         type: 'bar',
         label: 'Deposit',
-        data: [242, 120, 280, 390, 240, 240, 320],
+        data: [...depositData],
         backgroundColor: '#396AFF',
         borderColor: '#396AFF',
         borderWidth: 1,
@@ -59,21 +76,30 @@ const BarChart: FC = () => {
     ],
   };
 
-  const options = {
+  const options: ChartOptions<'bar'> = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: true,
         labels: {
-          generateLabels: (chart: ChartJS) => {
-            const datasets = chart.data.datasets;
-            return datasets.map((dataset, i: number) => ({
-              fontColor: '#718EBF',
-              text: ` ${dataset.label}`,
-              fillStyle: dataset.backgroundColor,
-              hidden: !chart.isDatasetVisible(i),
-              datasetIndex: i, // Dataset index,
-            }));
+          generateLabels: (chart: ChartJS): LegendItem[] => {
+            const datasets = chart?.data?.datasets;
+            return datasets?.length
+              ? datasets.map((dataset, i: number) => {
+                  const fillStyle =
+                    typeof dataset?.backgroundColor === 'string'
+                      ? dataset?.backgroundColor
+                      : undefined;
+                  return {
+                    fontColor: '#718EBF',
+                    text: ` ${dataset?.label}`,
+                    fillStyle: fillStyle,
+                    hidden: !chart.isDatasetVisible(i),
+                    datasetIndex: i,
+                  };
+                })
+              : [];
           },
           usePointStyle: true,
           boxWidth: 15,
@@ -90,7 +116,6 @@ const BarChart: FC = () => {
         enabled: true,
       },
     },
-
     scales: {
       x: {
         title: {
@@ -125,11 +150,17 @@ const BarChart: FC = () => {
     },
   };
 
+  if (isLoading)
+    return (
+      <div className="h-[356px] rounded-[25px] animate-pulse bg-gray-200"></div>
+    );
+
   return (
-    <div>
-      <div>
+    <div className="bg-white p-[25px] rounded-[25px]">
+      <div className="h-[322px]">
         <Chart
           className="-mt-4"
+          key={JSON.stringify(details)}
           type="bar"
           data={data}
           options={options}

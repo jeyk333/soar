@@ -6,7 +6,9 @@ import { RootState } from '@/store';
 import Edit from '@/assets/images/edit.png';
 import { UserInfoType } from '@/store/user/slice';
 import Textfield from '../common/Textfield';
-import { saveUserInfo } from '@/store/user/action';
+import { saveUserInfo, fetchUserInfo } from '@/store/user/action';
+import DateField from '../common/DateField';
+import { validatePassword } from '@/utils/passwordValidations';
 
 const DEFAULT_STATE: UserInfoType = {
   username: '',
@@ -24,13 +26,14 @@ const DEFAULT_STATE: UserInfoType = {
 
 const EditProfile: FC = () => {
   const [userInfo, setUserInfo] = useState<UserInfoType>(DEFAULT_STATE);
+  const [error, setError] = useState<boolean>(false);
   const { user, isLoading } = useSelector((root: RootState) => root.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(fetchUserInfo());
     setUserInfo(user ? user : DEFAULT_STATE);
   }, []);
-  console.log(userInfo);
 
   const handleUploadImage = (e: ChangeEvent<HTMLInputElement>) => {
     if (e?.target?.files?.[0]) {
@@ -48,47 +51,59 @@ const EditProfile: FC = () => {
       ...prev,
       [e.target.name]: e.target.value,
     }));
+    if (e.target.name === 'password' && validatePassword(e.target.value)) {
+      setError(false);
+    } else {
+      setError(true);
+    }
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const payload = {
-        ...userInfo,
-        id: userInfo?.id,
-      };
-      await dispatch(saveUserInfo(payload));
-      toast.success('Profile saved successfully');
+      if (validatePassword(userInfo?.password)) {
+        const payload = {
+          ...userInfo,
+          id: userInfo?.id,
+        };
+        await dispatch(saveUserInfo(payload));
+        setError(false);
+        toast.success('Profile saved successfully');
+      } else {
+        setError(true);
+      }
     } catch (err) {
-      console.log(err);
+      toast.error(`Something went wrong. Please try again! ${err}`);
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex flex-col md:flex-row gap-[57px]">
-        <div className="relative w-5/12 md:w-1/12 mx-auto">
-          <img
-            src={userInfo?.image}
-            alt={userInfo?.name}
-            className="w-[100px] md:w-[90px] h-[100px] md:h-[90px] rounded-full object-cover"
-          />
-          <label htmlFor="profile-image">
+      <div className="flex flex-col xl:flex-row gap-[57px]">
+        <div className="w-5/12 xl:w-1/12 mx-auto">
+          <div className="relative w-[100px] md:w-[90px] h-[100px] md:h-[90px]">
             <img
-              src={Edit}
-              alt="edit"
-              className="h-[30px] w-[30px] cursor-pointer absolute top-[58px] right-2"
+              src={userInfo?.image}
+              alt={userInfo?.name}
+              className="w-[100px] md:w-[90px] h-[100px] md:h-[90px] rounded-full object-cover"
             />
-          </label>
-          <input
-            id="profile-image"
-            className="hidden"
-            type="file"
-            onChange={handleUploadImage}
-          />
+            <label htmlFor="profile-image">
+              <img
+                src={Edit}
+                alt="edit"
+                className="h-[30px] hover:shadow-md rounded-full w-[30px] cursor-pointer absolute bottom-0 right-0"
+              />
+            </label>
+            <input
+              id="profile-image"
+              className="hidden"
+              type="file"
+              onChange={handleUploadImage}
+            />
+          </div>
         </div>
-        <div className="w-full md:w-11/12">
-          <div className="flex items-center flex-col md:flex-row gap-[29px] mb-[22px]">
+        <div className="w-full xl:w-11/12">
+          <div className="flex items-center flex-col md:flex-row gap-[29px] mb-4 md:mb-6">
             <Textfield
               value={userInfo?.name}
               onChange={handleInputChange}
@@ -104,10 +119,11 @@ const EditProfile: FC = () => {
               name="username"
               placeholder="Username"
               label="User Name"
+              required
               classNames="w-full md:w-1/2"
             />
           </div>
-          <div className="flex items-center flex-col md:flex-row gap-[29px] mb-[22px]">
+          <div className="flex items-center flex-col md:flex-row gap-[29px] mb-4 md:mb-6">
             <Textfield
               value={userInfo?.email}
               onChange={handleInputChange}
@@ -116,42 +132,51 @@ const EditProfile: FC = () => {
               label="Email"
               classNames="w-full md:w-1/2"
               type="email"
+              required
             />
             <Textfield
               value={userInfo?.password}
               onChange={handleInputChange}
               name="password"
+              required
+              type="password"
               placeholder="password"
               label="Password"
-              readOnly={true}
               classNames="w-full md:w-1/2"
+              errorMessage={
+                error
+                  ? 'Password must be at least 8 characters long, include 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character.'
+                  : ''
+              }
             />
           </div>
-          <div className="flex items-center flex-col md:flex-row gap-[29px] mb-[22px]">
-            <Textfield
+          <div className="flex items-center flex-col md:flex-row gap-[29px] mb-4 md:mb-6">
+            <DateField
               value={userInfo?.dob}
               onChange={handleInputChange}
               name="dob"
+              required
               placeholder="Date of Birth"
               label="Date of Birth"
               classNames="w-full md:w-1/2"
-              type="date"
             />
             <Textfield
               value={userInfo?.address}
               onChange={handleInputChange}
               name="address"
+              required
               placeholder="Present address"
               label="Present Address"
               classNames="w-full md:w-1/2"
             />
           </div>
-          <div className="flex items-center flex-col md:flex-row gap-[29px] mb-[22px]">
+          <div className="flex items-center flex-col md:flex-row gap-[29px] mb-4 md:mb-6">
             <Textfield
               value={userInfo?.permanentAddress}
               onChange={handleInputChange}
               name="permanentAddress"
               placeholder="Permanent Address"
+              required
               label="Permanent Address"
               classNames="w-full md:w-1/2"
             />
@@ -160,15 +185,17 @@ const EditProfile: FC = () => {
               onChange={handleInputChange}
               name="city"
               placeholder="City"
+              required
               label="City"
-              classNames="w-full md:w-1/22"
+              classNames="w-full md:w-1/2"
             />
           </div>
-          <div className="flex items-center flex-col md:flex-row gap-[29px] mb-[22px]">
+          <div className="flex items-center flex-col md:flex-row gap-[29px] mb-4 md:mb-6">
             <Textfield
               value={userInfo?.postalCode}
               onChange={handleInputChange}
               name="postalCode"
+              required
               placeholder="Postal Code"
               label="Postal Code"
               classNames="w-full md:w-1/2"
@@ -179,12 +206,13 @@ const EditProfile: FC = () => {
               onChange={handleInputChange}
               name="country"
               placeholder="Country"
+              required
               label="Country"
               classNames="w-full md:w-1/2"
             />
           </div>
         </div>
-      </div>
+      </div>{' '}
       <button
         type="submit"
         disabled={isLoading}

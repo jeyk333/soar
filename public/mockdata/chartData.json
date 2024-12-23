@@ -1,0 +1,17 @@
+{
+  "data": {
+    "weeklyActivity": {
+      "duration": ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
+      "withdraw": [450, 340, 320, 380, 240, 240, 360],
+      "deposit": [242, 120, 280, 390, 240, 240, 320]
+    },
+    "expenseStatistics": {
+      "labels": ["Entertainment", "Bill Expense", "Others", "Investment"],
+      "values": [25, 30, 25, 20]
+    },
+    "balanceHistory": {
+      "labels": ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"],
+      "values": [150, 420, 320, 400, 740, 340, 560]
+    }
+  }
+}
