@@ -17,6 +17,8 @@ const Setting: FC = () => {
       <div className="border-b border-border-light w-full pb-1 flex items-center gap-[42px] mb-[41px]">
         {TABS.map((tab: string) => (
           <button
+            role="button"
+            tabIndex={0}
             key={tab}
             className={`relative font-medium ${activeTab === tab ? 'text-text' : 'text-text-label'}`}
             onClick={() => setActiveTab(tab)}

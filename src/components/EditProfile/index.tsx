@@ -264,6 +264,8 @@ const EditProfile: FC = () => {
         </div>
       </div>{' '}
       <button
+        role="button"
+        tabIndex={0}
         type="submit"
         aria-label="Save profile data"
         disabled={isLoading}
