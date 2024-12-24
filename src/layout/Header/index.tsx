@@ -32,7 +32,7 @@ const Header: FC = () => {
           <h1 className="text-[20px] lg:text-[28px] text-primary font-semibold leading-[33.89px]">
             {PAGE_TITLES[pathname]}
           </h1>
-          <div className={`w-[255px] ml-auto hidden lg:block relative`}>
+          <div className={`w-[255px] ml-0 md:ml-auto hidden lg:block relative`}>
             <img
               src={SearchIcon}
               alt="search"
@@ -49,8 +49,12 @@ const Header: FC = () => {
               className="w-full bg-background pl-[56px] md:pr-[25px] py-[15px] rounded-[40px] text-[15px] bg-background placeholder:text-primary-light text-primary-light"
             />
           </div>
-          <Link to="/setting" aria-label="Go to Settings">
-            <div className="hover:shadow-md w-[50px] bg-background h-[50px] rounded-full hidden lg:flex items-center justify-center">
+          <Link
+            to="/setting"
+            aria-label="Go to Settings"
+            className="hidden lg:block"
+          >
+            <div className="hover:shadow-md w-[50px] bg-background h-[50px] rounded-full  flex items-center justify-center">
               <img
                 src={Settings}
                 alt="Settings"

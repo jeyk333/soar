@@ -5,7 +5,7 @@
       "value": "850",
       "label": "Deposit from my Card",
       "type": "card",
-      "date": "01-28-2024",
+      "date": "2024-01-28",
       "status": "loss"
     },
     {
@@ -13,7 +13,7 @@
       "value": "2,500",
       "label": "Deposit Paypal",
       "type": "paypal",
-      "date": "03-25-2024",
+      "date": "2024-03-25",
       "status": "profit"
     },
     {
@@ -21,7 +21,7 @@
       "value": "5,400",
       "label": "Jemi Wilson",
       "type": "token",
-      "date": "02-28-2024",
+      "date": "2024-02-28",
       "status": "profit"
     }
   ]

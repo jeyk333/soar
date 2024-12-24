@@ -45,7 +45,7 @@ const TransactionCard: FC<Props> = ({ transaction, isLoading }) => {
           {transaction.label}
         </p>
         <p className="text-text-label text-xs md:text-[15px] font-normal">
-          {dayjs(transaction.date).format('DD MMMM YYYY')}
+          {dayjs(new Date(transaction.date)).format('DD MMMM YYYY')}
         </p>
       </div>
       <p
