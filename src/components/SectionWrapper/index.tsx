@@ -18,6 +18,7 @@ const SectionWrapper: FC<Props> = ({ title, children, link, linkLabel }) => {
         {link ? (
           <Link
             to={link}
+            aria-label={`Go to ${title}`}
             className="font-semibold text-[14px] md:text-[17px] hover:underline"
           >
             {linkLabel}

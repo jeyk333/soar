@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import SectionWrapper from '@/components/SectionWrapper';
 import {
@@ -9,17 +9,18 @@ import {
   fetchContacts,
   fetchChartData,
 } from '@/store/user/action';
-import { RootState, AppDispatch } from '@/store';
+import { RootState } from '@/store';
 import CreditCard, { CreditCardType } from '@/components/CreditCard';
 import TransactionCard, { TransactionType } from '@/components/TransactionCard';
 import BarChart from '@/components/BarChart';
 import PolarAreaChart from '@/components/PolarAreaChart';
 import LineChart from '@/components/LineChart';
 import QuickTransfer from '@/components/QuickTransfer';
+import { useAppDispatch } from '@/store';
 
 const Dashboard: FC = () => {
   const user = useSelector((root: RootState) => root.user);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   console.log(user);
   useEffect(() => {
@@ -33,7 +34,7 @@ const Dashboard: FC = () => {
     dispatch(fetchContacts());
     dispatch(fetchChartData());
   };
-  console.log(user?.chartData?.weeklyActivity);
+
   return (
     <div>
       <div className="flex flex-col xl:flex-row gap-[30px]">

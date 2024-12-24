@@ -34,10 +34,15 @@ const Textfield: FC<PropType> = ({
         {label}
       </label>
       <input
+        aria-labelledby={name}
+        aria-invalid={!!errorMessage}
         required={required}
         readOnly={readOnly}
+        aria-required={required}
         type={type}
+        aria-readonly={readOnly}
         id={name}
+        aria-placeholder={placeholder}
         placeholder={placeholder}
         name={name}
         className={`text-text-label w-full border ${errorMessage ? 'border-error' : 'border-card-border'} rounded-[15px] px-5 py-4 text-xs md:text-[15px] ${readOnly ? 'focus:outline-none' : ''}`}
@@ -45,7 +50,9 @@ const Textfield: FC<PropType> = ({
         onChange={onChange}
       />
       {errorMessage ? (
-        <p className="text-[10px] absolute text-error">{errorMessage}</p>
+        <p aria-live="assertive" className="text-[10px] absolute text-error">
+          {errorMessage}
+        </p>
       ) : null}
     </div>
   );

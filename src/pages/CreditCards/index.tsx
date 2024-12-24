@@ -1,14 +1,15 @@
 import { FC, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import SectionWrapper from '@/components/SectionWrapper';
 import { fetchCreditCards } from '@/store/user/action';
-import { RootState, AppDispatch } from '@/store';
+import { RootState } from '@/store';
 import CreditCard, { CreditCardType } from '@/components/CreditCard';
+import { useAppDispatch } from '@/store';
 
 const CreditCards: FC = () => {
   const user = useSelector((root: RootState) => root.user);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     getUserData();

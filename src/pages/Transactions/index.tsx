@@ -1,13 +1,14 @@
 import { FC, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { fetchTransactions } from '@/store/user/action';
-import { RootState, AppDispatch } from '@/store';
+import { RootState } from '@/store';
 import TransactionCard, { TransactionType } from '@/components/TransactionCard';
+import { useAppDispatch } from '@/store';
 
 const Transactions: FC = () => {
   const user = useSelector((root: RootState) => root.user);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     getUserTransactions();

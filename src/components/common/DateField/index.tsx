@@ -41,9 +41,12 @@ const DateField: FC<PropType> = ({
         onClick={handleClick}
       >
         <input
+          aria-labelledby={name}
           className={`date-input text-text-label w-full border border-card-border rounded-[15px] px-5 py-4 text-xs md:text-[15px]`}
           required={required}
+          aria-required={required}
           type="date"
+          aria-placeholder={placeholder}
           id={name}
           name={name}
           placeholder={placeholder}

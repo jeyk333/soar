@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ThunkAction, Action } from '@reduxjs/toolkit';
+
 import { actions } from './slice';
 import {
   getUserInfo,
@@ -8,7 +9,7 @@ import {
   getChartData,
   postUserInfo,
 } from '@/services';
-import { AppDispatch } from '@/store';
+import { RootState } from '@/store';
 import { UserInfoType } from './slice';
 import { delay } from '@/utils/delay';
 import { store } from '@/store';
@@ -32,9 +33,9 @@ const {
   toggleMobileSidebar,
 } = actions;
 
-export const fetchUserInfo: any =
-  () =>
-  async (dispatch: AppDispatch): Promise<void> => {
+export const fetchUserInfo =
+  (): ThunkAction<Promise<void>, RootState, unknown, Action<string>> =>
+  async (dispatch) => {
     dispatch(loadingUserInfo());
     try {
       const response = await getUserInfo();
@@ -45,9 +46,9 @@ export const fetchUserInfo: any =
     }
   };
 
-export const fetchCreditCards: any =
-  () =>
-  async (dispatch: AppDispatch): Promise<void> => {
+export const fetchCreditCards =
+  (): ThunkAction<Promise<void>, RootState, unknown, Action<string>> =>
+  async (dispatch) => {
     dispatch(loadingCards());
     try {
       await delay(1500);
@@ -59,9 +60,9 @@ export const fetchCreditCards: any =
     }
   };
 
-export const fetchTransactions: any =
-  () =>
-  async (dispatch: AppDispatch): Promise<void> => {
+export const fetchTransactions =
+  (): ThunkAction<Promise<void>, RootState, unknown, Action<string>> =>
+  async (dispatch) => {
     dispatch(loadingTransactions());
     try {
       await delay(1500);
@@ -73,9 +74,9 @@ export const fetchTransactions: any =
     }
   };
 
-export const fetchContacts: any =
-  () =>
-  async (dispatch: AppDispatch): Promise<void> => {
+export const fetchContacts =
+  (): ThunkAction<Promise<void>, RootState, unknown, Action<string>> =>
+  async (dispatch) => {
     dispatch(loadingContacts());
     try {
       await delay(1500);
@@ -87,9 +88,9 @@ export const fetchContacts: any =
     }
   };
 
-export const fetchChartData: any =
-  () =>
-  async (dispatch: AppDispatch): Promise<void> => {
+export const fetchChartData =
+  (): ThunkAction<Promise<void>, RootState, unknown, Action<string>> =>
+  async (dispatch) => {
     dispatch(loadingChartData());
     try {
       await delay(1500);
@@ -101,9 +102,11 @@ export const fetchChartData: any =
     }
   };
 
-export const saveUserInfo: any =
-  (payload: UserInfoType) =>
-  async (dispatch: AppDispatch): Promise<void> => {
+export const saveUserInfo =
+  (
+    payload: UserInfoType
+  ): ThunkAction<Promise<void>, RootState, unknown, Action<string>> =>
+  async (dispatch) => {
     dispatch(loadingUserInfo());
     try {
       await delay(1500);
@@ -115,8 +118,8 @@ export const saveUserInfo: any =
     }
   };
 
-export const toggleSidebar: any =
-  () =>
-  async (dispatch: AppDispatch): Promise<void> => {
+export const toggleSidebar =
+  (): ThunkAction<Promise<void>, RootState, unknown, Action<string>> =>
+  async (dispatch) => {
     dispatch(toggleMobileSidebar(!store.getState().user?.showMobileSidebar));
   };

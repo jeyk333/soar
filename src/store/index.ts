@@ -1,10 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
 import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { useDispatch } from 'react-redux';
 
 import reducers from './reducers';
-
-const storage = createWebStorage('local');
 
 const persistConfig = {
   key: 'root',
@@ -14,17 +13,13 @@ const persistConfig = {
 // Persist reducer
 const persistedReducer = persistReducer(persistConfig, reducers);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const middleware = (getDefaultMiddleware: any) => {
-  return getDefaultMiddleware({
-    serializableCheck: false,
-  });
-};
-
 // Configure store
 export const store = configureStore({
   reducer: persistedReducer,
-  middleware,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 // Persistor
@@ -32,3 +27,4 @@ export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof reducers>;
 export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch;

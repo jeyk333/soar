@@ -31,6 +31,7 @@ const Sidebar: FC = () => {
           const Icon: ElementType = menu.icon;
           return (
             <Link
+              aria-label={`Go to ${menu.label}`}
               to={menu.path}
               onClick={() => dispatch(toggleSidebar())}
               key={menu.id}
@@ -43,6 +44,7 @@ const Sidebar: FC = () => {
               ) : null}
               <div className="w-[167px] mx-auto flex items-center gap-[26px]">
                 <Icon
+                  aria-hidden="true"
                   className="hover:text-text"
                   color={
                     pathname === menu.path || isHovering === menu.id
