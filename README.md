@@ -11,6 +11,7 @@ A performant web application built using **Vite**, **ReactJS**, **TypeScript**, 
 - **TailwindCSS** for utility-first styling.
 - **Lazy Loading** to optimize performance.
 - **Accessibility Standards** with ARIA attributes and testing tools.
+- **Browser Compatibility** - This app is compatible with all major browsers
 
 ## Technologies Used
 
