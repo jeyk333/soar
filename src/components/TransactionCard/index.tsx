@@ -41,7 +41,7 @@ const TransactionCard: FC<Props> = ({ transaction, isLoading }) => {
         />
       </div>
       <div>
-        <p className="text-text font-medium text-sm md:text-base mb-1 md:mb-2">
+        <p className="text-text font-medium text-sm 2xl:text-base mb-1 md:mb-2">
           {transaction.label}
         </p>
         <p className="text-text-label text-xs md:text-[15px] font-normal">
