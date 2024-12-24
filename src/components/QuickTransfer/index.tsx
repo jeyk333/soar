@@ -73,6 +73,8 @@ const QuickTransfer: FC<Props> = ({ contacts, isLoading }) => {
             className="text-xs md:text-[15px] bg-background w-[60px] md:w-[100px] placeholder:text-primary-light active:outline-none focus:outline-none"
           />
           <button
+            role="button"
+            tabIndex={0}
             type="submit"
             aria-label="Send amount"
             className="-ml-2 hover:font-semibold shadow-arrow hover:shadow-lg rounded-full px-[21px] md:px-6 py-[13px] bg-text text-[13px] md:text-base text-white flex items-center gap-3"
