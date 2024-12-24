@@ -75,11 +75,6 @@ soar/
 └── package.json           # Project metadata and scripts
 ```
 
-### Additional Details
-
-- **`constants/`**: Contains static constants such as API endpoints, configuration values, and other global constants.
-- **`utils/`**: Includes reusable utility functions like data manipulation, date formatting, or validation helpers.
-
 ## Scripts
 
 Here are some commonly used npm scripts:
