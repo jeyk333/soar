@@ -6,12 +6,19 @@ import {
   ArcElement,
   CategoryScale,
   ChartOptions,
+  PolarAreaController,
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
 import ChartDataLabels, { Context } from 'chartjs-plugin-datalabels';
 import { ChartDataType } from '@/store/user/slice';
 
-ChartJS.register(RadialLinearScale, ArcElement, ChartDataLabels, CategoryScale);
+ChartJS.register(
+  RadialLinearScale,
+  ArcElement,
+  ChartDataLabels,
+  CategoryScale,
+  PolarAreaController
+);
 
 interface Props {
   data: ChartDataType | undefined;
