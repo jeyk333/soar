@@ -9,10 +9,18 @@ import {
   ChartData,
   ChartOptions,
   LegendItem,
+  BarController,
 } from 'chart.js';
 import { Chart } from 'react-chartjs-2';
 
-ChartJS?.register(LinearScale, BarElement, PointElement, Tooltip, Legend);
+ChartJS?.register(
+  LinearScale,
+  BarElement,
+  PointElement,
+  Tooltip,
+  Legend,
+  BarController
+);
 
 export interface BarChartDataType {
   duration: string[];

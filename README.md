@@ -1,145 +1,101 @@
 # Soar
 
-This is a modern web application built using **Vite**, **ReactJS**, **TypeScript**, **Redux Toolkit**, and **TailwindCSS**. It is designed to be fast, maintainable, and scalable.
-
-## Table of Contents
-
-- [Getting Started](#getting-started)
-- [Features](#features)
-- [Folder Structure](#folder-structure)
-- [Scripts](#scripts)
-- [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Getting Started
-
-To get a local copy of the project up and running, follow these steps:
-
-### Prerequisites
-
-Make sure you have the following installed:
-
-- [Node.js](https://nodejs.org/) (version 16 or above)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-
-### Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/jeyk333/soar.git
-   ```
-
-2. Navigate to the project directory:
-
-   ```bash
-   cd soar
-   ```
-
-3. Install dependencies:
-
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-
-4. Start the development server:
-
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-
-5. Open your browser and navigate to `http://localhost:5173`.
+A performant web application built using **Vite**, **ReactJS**, **TypeScript**, **Redux Toolkit**, and **TailwindCSS**. This project is structured for scalability and adheres to modern development standards.
 
 ## Features
 
-- **Fast Development**: Built with Vite for lightning-fast builds.
-- **TypeScript Support**: Provides type safety and better developer experience.
-- **State Management**: Redux Toolkit for managing the application state efficiently.
-- **Responsive Design**: TailwindCSS for styling and responsive design.
-- **Scalable Architecture**: Clean and modular folder structure.
-
-## Folder Structure
-
-The project follows a modular and scalable folder structure:
-
-```
-soar/
-├── public/         # Static assets
-├── src/
-│   ├── assets/     # Images, fonts, and other assets
-│   ├── components/ # Reusable components
-│   ├── features/   # Redux slices and related logic
-│   ├── pages/      # Page components
-│   ├── services/   # API services and utilities
-│   ├── store/      # Redux store configuration
-│   ├── styles/     # Global and TailwindCSS styles
-│   ├── App.tsx     # Root application component
-│   ├── main.tsx    # Application entry point
-├── .eslintrc.js    # ESLint configuration
-├── tailwind.config.js # TailwindCSS configuration
-├── tsconfig.json   # TypeScript configuration
-└── vite.config.ts  # Vite configuration
-```
-
-## Scripts
-
-Here are the available scripts:
-
-- **Start Development Server**:
-
-  ```bash
-  npm run dev
-  # or
-  yarn dev
-  ```
-
-- **Build for Production**:
-
-  ```bash
-  npm run build
-  # or
-  yarn build
-  ```
-
-- **Preview Production Build**:
-
-  ```bash
-  npm run preview
-  # or
-  yarn preview
-  ```
-
-- **Lint the Code**:
-  ```bash
-  npm run lint
-  # or
-  yarn lint
-  ```
+- **Vite** for blazing-fast development and optimized builds.
+- **ReactJS** for building dynamic user interfaces.
+- **TypeScript** for type safety and better developer experience.
+- **Redux Toolkit** for state management.
+- **TailwindCSS** for utility-first styling.
+- **Lazy Loading** to optimize performance.
+- **Accessibility Standards** with ARIA attributes and testing tools.
 
 ## Technologies Used
 
-- **[Vite](https://vitejs.dev/)**: A fast build tool for modern web projects.
-- **[ReactJS](https://reactjs.org/)**: A JavaScript library for building user interfaces.
-- **[TypeScript](https://www.typescriptlang.org/)**: Typed superset of JavaScript for better development experience.
-- **[Redux Toolkit](https://redux-toolkit.js.org/)**: A modern approach to managing state in React.
-- **[TailwindCSS](https://tailwindcss.com/)**: A utility-first CSS framework for styling.
+- **Vite**: Development build tool providing fast builds and hot module replacement.
+- **ReactJS**: Library for building dynamic user interfaces.
+- **TypeScript**: Typed superset of JavaScript for catching errors early.
+- **Redux Toolkit**: Simplified state management for React applications.
+- **TailwindCSS**: Utility-first CSS framework for designing responsive layouts.
+- **Chart.js**: JavaScript library for creating beautiful charts.
+- **Day.js**: Lightweight library for date manipulation and formatting.
+- **Axios**: Promise-based HTTP client for making API calls.
+- **React Slick**: Carousel/slider library for React applications.
+- **Yup**: Schema validation library for form validation.
+- **ESLint**: Linter for identifying and fixing problems in JavaScript/TypeScript code.
+- **Prettier**: Code formatter to ensure consistent style.
 
-## Contributing
+## Installation
 
-Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
+To set up the project locally:
 
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/your-feature-name`).
-3. Make your changes.
-4. Commit your changes (`git commit -m 'Add some feature'`).
-5. Push to the branch (`git push origin feature/your-feature-name`).
-6. Open a pull request.
+```bash
+# Clone the repository
+git clone https://github.com/jeyk333/soar.git
+
+# Navigate to the project directory
+cd soar
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+
+## Folder Structure
+
+Here’s an overview of the project structure:
+
+```
+soar/
+├── public/                # Static assets
+├── src/                   # Source code
+│   ├── api/               # API service functions
+│   ├── assets/            # Images, icons, and static assets
+│   ├── components/        # Reusable React components
+│   ├── constants/         # Static constants used throughout the app
+│   ├── features/          # Redux slices and related logic
+│   ├── hooks/             # Custom React hooks
+│   ├── pages/             # Page-level components
+│   ├── router/            # React Router configuration
+│   ├── store/             # Redux store configuration
+│   ├── styles/            # Global and component-specific styles
+│   ├── types/             # TypeScript type definitions
+│   ├── utils/             # Utility functions
+│   └── main.tsx           # Application entry point
+├── .eslintrc.js           # ESLint configuration
+├── postcss.config.js      # PostCSS configuration
+├── tailwind.config.js     # TailwindCSS configuration
+├── tsconfig.json          # TypeScript configuration
+├── vite.config.ts         # Vite configuration
+└── package.json           # Project metadata and scripts
+```
+
+### Additional Details
+
+- **`constants/`**: Contains static constants such as API endpoints, configuration values, and other global constants.
+- **`utils/`**: Includes reusable utility functions like data manipulation, date formatting, or validation helpers.
+
+## Scripts
+
+Here are some commonly used npm scripts:
+
+- `npm run dev`: Start the development server.
+- `npm run build`: Build the project for production.
+- `npm run preview`: Preview the production build locally.
+- `npm run lint`: Run ESLint to identify and fix code issues.
+- `npm run format`: Format code using Prettier.
+
+## Accessibility
+
+This project adheres to basic accessibility standards:
+
+- ARIA labels for assistive technologies.
+- Keyboard navigation for all interactive elements.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
