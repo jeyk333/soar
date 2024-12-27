@@ -22,7 +22,6 @@ const Dashboard: FC = () => {
   const user = useSelector((root: RootState) => root.user);
   const dispatch = useAppDispatch();
 
-  console.log(user);
   useEffect(() => {
     getUserData();
   }, []);
@@ -57,7 +56,7 @@ const Dashboard: FC = () => {
         </div>
         <div className="w-full xl:w-4/12">
           <SectionWrapper title="Recent Transaction">
-            <div className="bg-white px-[18px] xl:px-[25px] py-5 xl:py-[25px] rounded-[25px]">
+            <div className="transaction-section bg-white px-[18px] xl:px-[25px] py-5 xl:py-[25px] rounded-[25px] h-[245px] overflow-y-auto">
               {user?.transactions?.map((transaction: TransactionType) => (
                 <TransactionCard
                   key={transaction.id}

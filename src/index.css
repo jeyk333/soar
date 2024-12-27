@@ -29,3 +29,8 @@
 .date-input::-webkit-calendar-picker-indicator {
   display: none; /* Hides the native calendar icon */
 }
+
+/* Transaction section */
+.transaction-section::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
